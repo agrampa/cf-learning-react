@@ -26,14 +26,21 @@ class App extends React.Component { // App is the name of the component
     this.state = { // IMMUTABLE
       count: 0,
     }
+
+    this.handleClick = this.handleClick.bind(this); // take the method and saying that no matter where it is called, it will always refer to this context of APP, not anything else that invokes it
   }
+
+  handleClick(e) { // e refers to the event, the virtual event on the virtual DOM, which gets translated to the actual dom when react.render is invoked
+    this.setState({ count: 4 }) // this refers to the instance of the constructor
+  }
+
   render() { // NECESSARY - returns some JSX
     return()
       <div>
         <Navbar /> // now navbar will show up first, then the h1 below
         <Navbar /> // now there will be two instances of the same navbar
         <h1>Cool</h1>
-        <p>Count: { this.state.count }</p>
+        <p onClick={this.handleClick}>Count: { this.state.count }</p> // how handleClick is a prop (property) of <p>
       </div>
   }
 }
