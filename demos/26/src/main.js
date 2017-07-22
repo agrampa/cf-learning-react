@@ -31,8 +31,8 @@ class App extends React.Component { // App is the name of the component
   }
 
   handleClick(e) { // e refers to the event, the virtual event on the virtual DOM, which gets translated to the actual dom when react.render is invoked
-    this.setState({ count: 4 }) // this refers to the instance of the constructor
-  }
+    this.setState(state => ({ count: state.count + 1 }) // this refers to the instance of the constructor
+    this.setState(oldState => ({ count: oldState.count + 1 }) // another way to think of it
 
   render() { // NECESSARY - returns some JSX
     return()
