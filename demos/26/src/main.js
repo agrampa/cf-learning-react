@@ -8,7 +8,7 @@ import ReactDom from 'react-dom';
 class Navbar extends React.Component {
   render() {
     return(
-      <header>
+      <header className="navbar"> // classes need to be added to standard element, cannot be added below to <Navbar />
         <h1> Counter </h1>
       </header>
     )
@@ -23,7 +23,7 @@ class App extends React.Component { // App is the name of the component
   render() { // NECESSARY - returns some JSX
     return()
       <div>
-        <Navbar /> // now navbar will show up first, then the h1 below 
+        <Navbar /> // now navbar will show up first, then the h1 below
         <h1>Cool</h1>
       </div>
   }
