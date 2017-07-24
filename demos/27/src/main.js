@@ -8,12 +8,20 @@ import ReactDom from 'react-dom';
 class PokemonForm extends React.Component {
   constructor(props){
     super(props)
+    this.state = {  // form values need to be bound to component state
+
+    }
   }
 
   render(){
     return(
       <form>
-
+        <input
+          type="text"
+          name="pokemonName"
+          placeholder="pokemon name"
+          onChange={this.handleChange}
+        />
       </form>
     )
   }
