@@ -126,11 +126,15 @@ class App extends React.Component {
         { this.state.pokemonNameError ?
           <div>
           <h2>Selected: {this.state.pokemonSelected.name}</h2>
-          </div>}
-          <div>
+          </div> :
+          { this.state.pokemonSelected ?
+            <div>
             <h2>Sorry, pokemon {this.state.pokemonNameError} does not exist</h2>
             <p>Make another request</p>
-          </div> :
+            </div>
+          } :
+          <div></div>
+          }
       </div>
     )
   }
