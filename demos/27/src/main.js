@@ -57,10 +57,12 @@ class App extends React.Component {
       pokemonSelected: null,
       pokemonNameError: '',
     }
+
+    this.selectPokemon = this.selectPokemon.bind(this);
   }
 
   // called every time the state changes
-  componentWillUpdate() {
+  componentDidUpdate() {
     // debugging
     console.log('___STATE____', this.state);
   }
@@ -96,7 +98,7 @@ class App extends React.Component {
   }
 
   selectPokemon(name) {
-    if(!pokemonLookup[name]) {
+    if(!this.state.pokemonLookup[name]) {
       // do something on state that enables the view to show an error that the pokemon does not exist
       this.setState({
         pokemonSelected: null,
@@ -104,9 +106,12 @@ class App extends React.Component {
       })
     } else {
       // make a request to the pokemon api and do something on state to store the poke's details to be displayed to the user
-      superagent.get(pokemonLookup[name])
+      superagent.get(this.state.pokemonLookup[name])
       .then(res => {
-
+        this.setState({
+          pokemonSelected: res.body,
+          pokemonNameError: null,
+        })
       })
       .catch(console.error)
     }
@@ -118,7 +123,14 @@ class App extends React.Component {
         <h1>Form Demo</h1>
         // the form needs access to selectPokemon if it is every going to access it, pass in via props
         <PokemonForm selectPokemon={this.selectPokemon} />
-        <p>Pokemon name error: {this.state.pokemonNameError}</p>
+        { this.state.pokemonNameError ?
+          <div>
+            <h2>Sorry, pokemon {this.state.pokemonNameError} does not exist</h2>
+            <p>Make another request</p>
+          </div> :
+          <div>
+            <h2>Selected: {this.pokemonSelected.name}</h2>
+          </div>}
       </div>
     )
   }
