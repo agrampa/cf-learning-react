@@ -8,9 +8,17 @@ import ReactDom from 'react-dom';
 class PokemonForm extends React.Component {
   constructor(props){
     super(props)
-    this.state = {  // form values need to be bound to component state
 
+    // controlled inputs: all inputs should have their value bound to a state
+    this.state = {  // form values need to be bound to component state
+      pokeName: ''
     }
+
+    this.handlePokeNameChange = this.handlePokeNameChange.bind(this)
+  }
+
+  handlePokeNameChange(e) {
+    this.setState({pokeName = e.target.value})
   }
 
   render(){
@@ -20,7 +28,8 @@ class PokemonForm extends React.Component {
           type="text"
           name="pokemonName"
           placeholder="pokemon name"
-          onChange={this.handleChange}
+          onChange={this.handlePokeNameChange}
+          value={this.state.pokeName}
         />
       </form>
     )
@@ -38,6 +47,7 @@ class App extends React.Component {
     return(
       <div>
         <h1>Form Demo</h1>
+        <PokemonForm />
       </div>
     )
   }
