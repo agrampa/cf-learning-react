@@ -1,6 +1,9 @@
 
 import React from 'react';
 import ReactDom from 'react-dom';
+import superagent from 'superagent';
+
+const API_URL = 'http://pokeapi.com/api/v2';
 
 // create a form container component every time you creat a form
 // the component will have its own state and will manage the state of the form's inputs
@@ -43,6 +46,19 @@ class PokemonForm extends React.Component {
 class App extends React.Component {
   constructor(props){
     super(props);
+    this.state = {
+      pokemonLookup: [],
+    }
+  }
+
+  // this will be called once right before the app component mounts/is added to DOM
+  componentWillMount(){
+    superagent.get(`${API_URL}/pokemon/`)
+    // will replace state pokemonLookup array with response
+    .then(res => {
+      this.setState({pokemonLoopup: res.body.results})
+    })
+    .catch(console.error())
   }
 
   render(){
