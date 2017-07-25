@@ -125,12 +125,12 @@ class App extends React.Component {
         <PokemonForm selectPokemon={this.selectPokemon} />
         { this.state.pokemonNameError ?
           <div>
+          <h2>Selected: {this.pokemonSelected.name}</h2>
+          </div>}
+          <div>
             <h2>Sorry, pokemon {this.state.pokemonNameError} does not exist</h2>
             <p>Make another request</p>
           </div> :
-          <div>
-            <h2>Selected: {this.pokemonSelected.name}</h2>
-          </div>}
       </div>
     )
   }
