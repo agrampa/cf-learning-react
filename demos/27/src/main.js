@@ -31,6 +31,8 @@ class PokemonForm extends React.Component {
           onChange={this.handlePokeNameChange}
           value={this.state.pokeName}
         />
+        <p>Name: </p>
+        <p>{ this.state.pokeName }</p>
       </form>
     )
   }
