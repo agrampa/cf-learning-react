@@ -18,15 +18,21 @@ class PokemonForm extends React.Component {
     }
 
     this.handlePokeNameChange = this.handlePokeNameChange.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
   }
 
   handlePokeNameChange(e) {
     this.setState({pokeName = e.target.value})
   }
 
+  handleSubmit(e) {
+    e.preventDefault(); // needed for submit events
+    this.props.selectPokemon(this.state.pokeName)
+  }
+
   render(){
     return(
-      <form>
+      <form onSubmit={this.handleSubmit}>
         <input
           type="text"
           name="pokemonName"
@@ -47,18 +53,32 @@ class App extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      pokemonLookup: [],
+      pokemonLookup: {},
+      pokemonSelected: {},
     }
   }
 
   // this will be called once right before the app component mounts/is added to DOM
-  componentWillMount(){
+  // componentWillMount(){
+  componentDidMount(){
     superagent.get(`${API_URL}/pokemon/`)
     // will replace state pokemonLookup array with response
     .then(res => {
-      this.setState({pokemonLoopup: res.body.results})
+      let pokemonLookup = res.body.results.reduce((lookup, next) => {
+        lookup[next.name] = next.url;
+        return lookup;
+      }, {}) // every lookup will add to the object
+      this.setState({pokemonLookup})
     })
     .catch(console.error())
+  }
+
+  selectPokemon(name) {
+    if(!pokemonLookup[name]) {
+      // do something on state that enables the view to show an error that the pokemon does not exist
+    } else {
+      // make a request to the pokemon api and do something on state to store the poke's details to be displayed to the user
+    }
   }
 
   render(){
