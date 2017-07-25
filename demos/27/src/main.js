@@ -54,30 +54,61 @@ class App extends React.Component {
     super(props);
     this.state = {
       pokemonLookup: {},
-      pokemonSelected: {},
+      pokemonSelected: null,
+      pokemonNameError: '',
     }
+  }
+
+  // called every time the state changes
+  componentWillUpdate() {
+    // debugging
+    console.log('___STATE____', this.state);
   }
 
   // this will be called once right before the app component mounts/is added to DOM
   // componentWillMount(){
   componentDidMount(){
-    superagent.get(`${API_URL}/pokemon/`)
-    // will replace state pokemonLookup array with response
-    .then(res => {
-      let pokemonLookup = res.body.results.reduce((lookup, next) => {
-        lookup[next.name] = next.url;
-        return lookup;
-      }, {}) // every lookup will add to the object
-      this.setState({pokemonLookup})
-    })
-    .catch(console.error())
+    if(localStorage.pokemonLookup) {
+      try{
+        let pokemonLookup = JSON.parse(localStorage.pokemonLookup)
+        this.setState({pokemonLookup})
+      } catch(err) {
+        console.error(err);
+      }
+    } else {
+      superagent.get(`${API_URL}/pokemon/`)
+      // will replace state pokemonLookup array with response
+      .then(res => {
+        let pokemonLookup = res.body.results.reduce((lookup, next) => {
+          lookup[next.name] = next.url;
+          return lookup;
+        }, {}) // every lookup will add to the object
+
+        try {
+          localStorage.pokemonLookup = JSON.stringify(pokemonLookup)
+          this.setState({pokemonLookup})
+        } catch(err) {
+          console.error(err);
+        }
+      })
+      .catch(console.error())
+    }
   }
 
   selectPokemon(name) {
     if(!pokemonLookup[name]) {
       // do something on state that enables the view to show an error that the pokemon does not exist
+      this.setState({
+        pokemonSelected: null,
+        pokemonNameError: name,
+      })
     } else {
       // make a request to the pokemon api and do something on state to store the poke's details to be displayed to the user
+      superagent.get(pokemonLookup[name])
+      .then(res => {
+
+      })
+      .catch(console.error)
     }
   }
 
@@ -85,7 +116,9 @@ class App extends React.Component {
     return(
       <div>
         <h1>Form Demo</h1>
-        <PokemonForm />
+        // the form needs access to selectPokemon if it is every going to access it, pass in via props
+        <PokemonForm selectPokemon={this.selectPokemon} />
+        <p>Pokemon name error: {this.state.pokemonNameError}</p>
       </div>
     )
   }
