@@ -1,9 +1,13 @@
 // import './style/main.scss'
 
+// npm modules
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {BrowserRouter, Route} from 'react-router-dom';
 // import {BrowserRouter as Router} <- can rename here
+
+// app modules
+import AboutContainer from './component/about-container';
 
 // App component will return all of the other components
 class App extends React.Component {
