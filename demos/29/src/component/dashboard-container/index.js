@@ -1,6 +1,6 @@
 import React from 'react';
 import Navbar from '../navbar';
-import ExpenseCreateForm from '../expense-create-form';
+import ExpenseForm from '../expense-form';
 import ExpenseList from '../expense-list';
 
 class DashboardContainer extends React.Component {
@@ -61,7 +61,7 @@ class DashboardContainer extends React.Component {
         <p> Total Spent: {totalSpent} </p>
         <p> Remaining Budget: {remainingBudget} </p>
         // expenseCreate is a prop here -- the second one below in the middle
-        <ExpenseCreateForm expenseCreate={this.expenseCreate} />
+        <ExpenseForm handleSubmit={this.expenseCreate} submitTitle='add expense'/>
         // can also say expenses={app.state.expenses} and get rid of expeneses variable above
         <ExpenseList
           expenseRemove={this.expenseRemove}
