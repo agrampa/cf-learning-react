@@ -8,12 +8,12 @@ describe('Example true to be true for setup', () => {
 // testing form component
 import React from 'react';
 import {shallow} from 'enzyme';
-import ExpenseCreateForm from '../component/expense-create-form';
+import ExpenseForm from '../component/expense-form';
 
-describe('Testing ExpenseCreateForm component', () => {
+describe('Testing ExpenseForm component', () => {
   test('should have correct default state', () => {
     // test is expecgint the handleExpenseCreate method in general but doesn't care that this is not the actual function and doesn't actually do anything
-    let wrapper = shallow(<ExpenseCreateForm handleExpenseCreate={() => {}} />)
+    let wrapper = shallow(<ExpenseForm handleExpenseCreate={() => {}} />)
     expect(wrapper.state('title')).toBe('');
     expect(wrapper.state('price')).toBe(0);
   });
@@ -24,7 +24,7 @@ describe('Testing ExpenseCreateForm component', () => {
       expect(expense.price).toEqual(0);
     }
 
-    let wrapper = shallow(<ExpenseCreateForm handleExpenseCreate = {expenseCreate} />)
+    let wrapper = shallow(<ExpenseForm handleExpenseCreate = {expenseCreate} />)
     wrapper.find('form').simulate('submit');
   });
 });

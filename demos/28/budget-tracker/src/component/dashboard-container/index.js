@@ -1,7 +1,7 @@
 import React from 'react';
 import uuid from 'uuid/v1';
 
-import ExpenseCreateForm from '../expense-create-form';
+import ExpenseForm from '../expense-form';
 
 // state is only in the context of what this is displaying
 class DashboardContainer extends React.Component {
@@ -23,7 +23,7 @@ class DashboardContainer extends React.Component {
   render() {
     return (
       <div className='dashboard-container'>
-        <ExpenseCreateForm handleExpenseCreate={this.expenseCreate} />
+        <ExpenseForm handleExpenseCreate={this.expenseCreate} />
         // <p>Hello from the dashboard</p>
       </div>
     )
