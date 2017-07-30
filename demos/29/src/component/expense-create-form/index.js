@@ -14,7 +14,21 @@ class ExpenseCreateForm extends React.Component {
   }
 
   handleChange(e) {
+    let {name, value, type} = e.target;
 
+    if(type === 'number') {
+      try {
+        this.setState({
+          [name]: parseInt(value)
+        })
+      } catch(err) {
+        console.error(err);
+      }
+    } else {
+      this.setState({
+        [name]: value,
+      })
+    }
   }
 
   handleSubmit(e) {
