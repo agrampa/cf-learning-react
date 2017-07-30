@@ -24,11 +24,23 @@ class DashboardContainer extends React.Component {
 
   // render
   render() {
+    let {app} = this.props;
+    let {expenses} = app.state; // app has state and setState properties
     return (
       <div className='dashboard-container'>
         <Navbar />
         // expenseCreate is a prop here -- the second one below in the middle
         <ExpenseCreateForm expenseCreate={this.expenseCreate} />
+        <div className='expense-list'>
+          <ul>
+          {expenses.map((item, i) => {
+            <li key={i}>
+              <p>title: {item.title}</p>
+              <p>price: {item.price}</p>
+            </li>
+          })}
+          </ul>
+        </div
         <p> Dashboard </p>
       </div>
     )
