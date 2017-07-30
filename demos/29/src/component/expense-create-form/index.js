@@ -19,6 +19,8 @@ class ExpenseCreateForm extends React.Component {
     if(type === 'number') {
       try {
         this.setState({
+          // use [name] to use the variable as the key, instead of using name: as the property
+          // will show up as expenseEntered: priceEntered
           [name]: parseInt(value)
         })
       } catch(err) {
@@ -33,6 +35,8 @@ class ExpenseCreateForm extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
+    // passed into here from dashboard via props
+    this.props.expenseCreate(this.state);
   }
 
   render() {
