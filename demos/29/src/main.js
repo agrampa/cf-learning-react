@@ -40,6 +40,7 @@ class App extends React.Component {
             <Route exact path='/'
             // every time render is called (when state changes, template will re-render), getApp is called, getting the object and passing it in through props and updating state inside the child components
             // remember, props is an attribute with key-value pairs, props refers to properties
+            // add as many props as you want to a component
               component={() => <DashboardContainer app={this.getApp()} />} />
             <Route exact path='/about' component={AboutContainer} />
           </div>
@@ -52,6 +53,9 @@ class App extends React.Component {
 ReactDom.render(<App />, document.getElementById('root'));
 
 
+// identical statements:
+//  <DashboardContainer app={this.getApp()} />
+//  new DashboardContainer({app: this.getApp()})
 
 
 
