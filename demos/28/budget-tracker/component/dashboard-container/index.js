@@ -1,5 +1,7 @@
 import React from 'react';
-import uuid from 'uuid';
+import uuid from 'uuid/v1';
+
+import ExpenseCreateForm from '../expense-create-form';
 
 // state is only in the context of what this is displaying
 class DashboardContainer extends React.Component {
@@ -10,7 +12,7 @@ class DashboardContainer extends React.Component {
   }
 
   expenseCreate(expense) {
-    expense.id = uuid.v1();
+    expense.id = uuid();
     this.props.app.setState(state => ({ // use parens and curlys to return an object
       return {
         expenses: [...state.expenses, expense] // spread out the existing expenses, add the expense that was passed in into this array of expenses
