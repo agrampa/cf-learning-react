@@ -2,7 +2,10 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
+import {BrowserRouter, Route} from 'react-router-dom';
+// import {BrowserRouter as Router} <- can rename here
 
+// App component will return all of the other components
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -17,7 +20,9 @@ class App extends React.Component {
   render() {
     return(
       <main>
-        <p>Hello World</p>
+        <BrowserRouter>
+          <Route exact path='/about' component={AboutContainer} />
+        </BrowserRouter>
       </main>
     )
   }
