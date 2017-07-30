@@ -11,6 +11,8 @@ const API_URL = 'http://www.reddit.com/r';
 //   SearchForm (collect user input)
 //   SearchResultsList (display reddit posts)
 
+let renderIf = (test, component) => test ? component : undefined;
+
 class SearchForm extends React.Component{
   constructor(props) {
     super(props);
@@ -106,8 +108,13 @@ class App extends React.Component {
       <main>
         <h1>cool beans</h1> // testing out to make sure webpack builds properly
         // search form needs to have the redditBoardFetch method here or else it will say that redditBoardFetch is not a function
-        <SearchForm title='Reddit board' handleSearch={this.redditBoardFetch}/> // nested component
-        <SearchResultsList articles={this.state.results || []}/> // nested component
+        <SearchForm title='Reddit board' handleSearch={this.redditBoardFetch}/> // nested components
+        // use instead of ternary
+        {renderIf(this.state.results,
+          <SearchResultsList articles={this.state.results}/>)}
+
+        {renderIf(this.state.searchErrorMessagerrorMessage,
+          <p>{this.state.searchErrorMessage</p>)}
       </main>
     )
   }
