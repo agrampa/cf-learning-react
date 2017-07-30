@@ -2,20 +2,13 @@ import React from 'react';
 import ReactDom from 'react-dom';
 import {BrowserRouter, Route} from 'react-router-dom';
 
+import AboutContainer from './component/about-container';
+import DashboardContainer from './component/dashboard-container';
+
 class App extends React.Component {
   render() {
     return(
       <main className='app'>
-        <header>
-          <h1>Budget Tracker</h1>
-          <nav>
-            <ul>
-            // link is an anchor tag that will update browser history without refreshing the page
-              <li><Link to='/'>Dashboard</Link></li>
-              <li><Link to='/about'>About</Link></li>
-            </ul>
-          </nav>
-        </header>
         <BrowserRouter> // browser router can only have one thing, but the div can have a lot
           <div>
             <Route exact path='/' component={DashboardContainer} />
@@ -62,3 +55,32 @@ const App = (props) => {
 }
 
 ReactDom.render(<App title='cool beans' />, document.getElementById('root'));
+
+
+
+// cannot use Link to syntax here
+
+class App extends React.Component {
+  render() {
+    return(
+      <main className='app'>
+        <header>
+          <h1>Budget Tracker</h1>
+          <nav>
+            <ul>
+            // link is an anchor tag that will update browser history without refreshing the page
+              <li><a href='/'>Dashboard</a></li>
+              <li><a href='/about'>About</a></li>
+            </ul>
+          </nav>
+        </header>
+        <BrowserRouter> // browser router can only have one thing, but the div can have a lot
+          <div>
+            <Route exact path='/' component={DashboardContainer} />
+            <Route exact path='/about' component={Dashboard} />
+          </div>
+        </BrowserRouter>
+      </main>
+    )
+  }
+}
