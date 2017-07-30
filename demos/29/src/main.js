@@ -6,13 +6,43 @@ import AboutContainer from './component/about-container';
 import DashboardContainer from './component/dashboard-container';
 
 class App extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      total: 400,
+      expenses: [],
+    }
+
+    this.getApp = this.getApp.bind(this);
+  }
+
+  // hooks
+  componentDidUpdate() {
+    console.log(':::STATE:::', this.state);
+  }
+
+  // methods
+  getApp() {
+    return {
+      state: this.state,
+      setState: this.setState.bind(this);
+    }
+  }
+
+
+  // render
   render() {
     return(
       <main className='app'>
         <BrowserRouter> // browser router can only have one thing, but the div can have a lot
           <div>
-            <Route exact path='/' component={DashboardContainer} />
-            <Route exact path='/about' component={Dashboard} />
+            <Route exact path='/'
+            // every time render is called (when state changes, template will re-render), getApp is called, getting the object and passing it in through props and updating state inside the child components
+            // remember, props is an attribute with key-value pairs, props refers to properties
+            // add as many props as you want to a component
+              component={() => <DashboardContainer app={this.getApp()} />} />
+            <Route exact path='/about' component={AboutContainer} />
           </div>
         </BrowserRouter>
       </main>
@@ -23,6 +53,9 @@ class App extends React.Component {
 ReactDom.render(<App />, document.getElementById('root'));
 
 
+// identical statements:
+//  <DashboardContainer app={this.getApp()} />
+//  new DashboardContainer({app: this.getApp()})
 
 
 
