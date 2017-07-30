@@ -1,13 +1,13 @@
 import React from 'react';
 
-class ExpenseCreateForm extends React.Component {
+class ExpenseForm extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      title: '',
-      price: 0,
-    }
+    let title = props.expense ? props.expense.title : '';
+    let title = props.expense ? props.expense.price : 0;
+
+    this.state = { title, price } // no default set here anymore, now it is set above so it can be used for creating AND updating an expense item
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -36,21 +36,21 @@ class ExpenseCreateForm extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
     // passed into here from dashboard via props
-    this.props.expenseCreate(this.state);
+    this.props.handleSubmit(this.state);
   }
 
   render() {
     return(
-      <form className='expense-create-form'
+      <form className='expense-form'
         onSubmit={this.handleSubmit}
         // value and onChange are required for EVERY input
         <input name='title' type='text' value={this.state.title} onChange={this.handleChange} />
         <input name='price' type='text' value={this.state.price} onChange={this.handleChange} />
 
-        <button type='submit'> + Add Expense </button>
+        <button type='submit'> {this.props.submitTitle} </button>
       </form>
     )
   }
 }
 
-export default ExpenseCreateForm;
+export default ExpenseForm;

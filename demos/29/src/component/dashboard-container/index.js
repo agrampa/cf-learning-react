@@ -1,6 +1,6 @@
 import React from 'react';
 import Navbar from '../navbar';
-import ExpenseCreateForm from '../expense-create-form';
+import ExpenseForm from '../expense-form';
 import ExpenseList from '../expense-list';
 
 class DashboardContainer extends React.Component {
@@ -8,6 +8,8 @@ class DashboardContainer extends React.Component {
     super(props);
 
     this.expenseCreate = this.expenseCreate.bind(this);
+    this.expenseRemove = this.expenseRemove.bind(this);
+    this.expenseUpdate = this.expenseUpdate.bind(this);
   }
 
   // methods
@@ -21,6 +23,24 @@ class DashboardContainer extends React.Component {
     app.setState(prevState => ({
       expenses: prevState.expenses.concat([expense]), // can also use spread operator
     }))
+  }
+
+  expenseRemove(expense) {
+    let {app} = this.props;
+    app.setState(prevState => {
+      expenses: prevState.expenses.filter((item) => {
+        return item.id !== expense.id;
+      })
+    })
+  }
+
+  expenseUpdate(expense) {
+    let {app} = this.props;
+    app.setState(prevState => {
+      expenses: prevState.expenses.map((item) => {
+        return item.id === expense.id ? expense : item;
+      })
+    })
   }
 
   // render
@@ -41,9 +61,12 @@ class DashboardContainer extends React.Component {
         <p> Total Spent: {totalSpent} </p>
         <p> Remaining Budget: {remainingBudget} </p>
         // expenseCreate is a prop here -- the second one below in the middle
-        <ExpenseCreateForm expenseCreate={this.expenseCreate} />
+        <ExpenseForm handleSubmit={this.expenseCreate} submitTitle='add expense'/>
         // can also say expenses={app.state.expenses} and get rid of expeneses variable above
-        <ExpenseList expenses={expenses} />
+        <ExpenseList
+          expenseRemove={this.expenseRemove}
+          expenseUpdate={this.expenseUpdate}
+          expenses={expenses} />
         <p> Dashboard </p>
       </div>
     )
