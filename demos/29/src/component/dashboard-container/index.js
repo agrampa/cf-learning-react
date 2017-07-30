@@ -9,6 +9,7 @@ class DashboardContainer extends React.Component {
 
     this.expenseCreate = this.expenseCreate.bind(this);
     this.expenseRemove = this.expenseRemove.bind(this);
+    this.expenseUpdate = this.expenseUpdate.bind(this);
   }
 
   // methods
@@ -29,6 +30,15 @@ class DashboardContainer extends React.Component {
     app.setState(prevState => {
       expenses: prevState.expenses.filter((item) => {
         return item.id !== expense.id;
+      })
+    })
+  }
+
+  expenseUpdate(expense) {
+    let {app} = this.props;
+    app.setState(prevState => {
+      expenses: prevState.expenses.map((item) => {
+        return item.id === expense.id ? expense : item;
       })
     })
   }
@@ -55,6 +65,7 @@ class DashboardContainer extends React.Component {
         // can also say expenses={app.state.expenses} and get rid of expeneses variable above
         <ExpenseList
           expenseRemove={this.expenseRemove}
+          expenseUpdate={this.expenseUpdate}
           expenses={expenses} />
         <p> Dashboard </p>
       </div>
