@@ -22,7 +22,7 @@ class DashboardContainer extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className='dashboard-container'>
         <ExpenseCreateForm handleExpenseCreate={this.expenseCreate} />
         // <p>Hello from the dashboard</p>
       </div>
