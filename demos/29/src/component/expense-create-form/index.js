@@ -52,3 +52,5 @@ class ExpenseCreateForm extends React.Component {
     )
   }
 }
+
+export default ExpenseCreateForm;

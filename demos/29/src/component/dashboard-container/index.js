@@ -1,5 +1,6 @@
 import React from 'react';
 import Navbar from '../navbar';
+inport ExpenseCreateForm from '../expense-create-form';
 
 class DashboardContainer extends React.Component {
   constructor(props) {
@@ -16,9 +17,9 @@ class DashboardContainer extends React.Component {
 
     // immutably add a new expense to the old expenses array on app's state
     let {app} = this.props;
-    app.setState(prevState => {
+    app.setState(prevState => ({
       expenses: prevState.expenses.concat([expense]), // can also use spread operator
-    })
+    }))
   }
 
   // render
@@ -26,6 +27,8 @@ class DashboardContainer extends React.Component {
     return (
       <div className='dashboard-container'>
         <Navbar />
+        // expenseCreate is a prop here -- the second one below in the middle
+        <ExpenseCreateForm expenseCreate={this.expenseCreate} />
         <p> Dashboard </p>
       </div>
     )
