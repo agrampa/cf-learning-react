@@ -5,7 +5,7 @@ import ReactDOM from 'react-dom';
 
 class App extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
   }
 
   render() {
@@ -16,3 +16,5 @@ class App extends React.Component {
     )
   }
 }
+
+ReactDom.render(<App />, document.getElementById('root'));
