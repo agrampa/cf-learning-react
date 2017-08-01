@@ -2,10 +2,17 @@ import React from 'react';
 import Navbar from '../navbar';
 import ExpenseForm from '../expense-form';
 import ExpenseList from '../expense-list';
+import Modal from '../modal';
+
+let renderIf = (test, component) => test ? component : undefined;
 
 class DashboardContainer extends React.Component {
   constructor(props) {
     super(props);
+
+    this.state = {
+      showErrors: true,
+    }
 
     this.expenseCreate = this.expenseCreate.bind(this);
     this.expenseRemove = this.expenseRemove.bind(this);
@@ -60,14 +67,25 @@ class DashboardContainer extends React.Component {
         <p> Total Budget: {app.state.total} </p>
         <p> Total Spent: {totalSpent} </p>
         <p> Remaining Budget: {remainingBudget} </p>
+
         // expenseCreate is a prop here -- the second one below in the middle
         <ExpenseForm handleSubmit={this.expenseCreate} submitTitle='add expense'/>
+
         // can also say expenses={app.state.expenses} and get rid of expeneses variable above
         <ExpenseList
           expenseRemove={this.expenseRemove}
           expenseUpdate={this.expenseUpdate}
           expenses={expenses} />
+
         <p> Dashboard </p>
+
+        {renderIf(remainingBudget < 0 && this.state.showErrors,
+          <Modal close={() => this.setState({showErrors: false})}>
+          <p>You are over budget!</p>
+          <p>Current Balance: {remainingBudget}</p>
+          </Modal>
+        )}
+
       </div>
     )
   }
