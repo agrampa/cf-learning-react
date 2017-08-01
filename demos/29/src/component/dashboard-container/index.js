@@ -4,9 +4,15 @@ import ExpenseForm from '../expense-form';
 import ExpenseList from '../expense-list';
 import Modal from '../modal';
 
+let renderIf = (test, component) => test ? component : undefined;
+
 class DashboardContainer extends React.Component {
   constructor(props) {
     super(props);
+
+    this.state = {
+      showErrors: true,
+    }
 
     this.expenseCreate = this.expenseCreate.bind(this);
     this.expenseRemove = this.expenseRemove.bind(this);
@@ -73,10 +79,13 @@ class DashboardContainer extends React.Component {
 
         <p> Dashboard </p>
 
-        <Modal close={() => console.log('Hi!')}>
+        {renderIf(remainingBudget < 0 && this.state.showErrors,
+          <Modal close={() => this.setState({showErrors: false})}>
           <p>You are over budget!</p>
           <p>Current Balance: {remainingBudget}</p>
-        </Modal>
+          </Modal>
+        )}
+
       </div>
     )
   }
