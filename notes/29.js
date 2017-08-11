@@ -63,4 +63,14 @@ yarn add --dev jest babel-jest enzyme react-test-renderer
 
 
 use <Link to></Link> to change view without refreshing page
-use <a> to refresh the page 
+use <a> to refresh the page
+
+Modals
+- button to click and trigger a function called close, will toggle the visibility of the children
+- this.props.children is a special prop that comes from putting stuff inside a non-self-closing tag
+- so, when the modal is used, anything inside of the modal tag is equal to 'this.props.children'
+
+<Modal close={() => console.log('Hi!')}>
+  <p>Cool</p>
+  <strong>Beans</strong>
+</Modal>
