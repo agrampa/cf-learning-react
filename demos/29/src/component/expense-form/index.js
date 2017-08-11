@@ -5,7 +5,7 @@ class ExpenseForm extends React.Component {
     super(props);
 
     let title = props.expense ? props.expense.title : '';
-    let title = props.expense ? props.expense.price : 0;
+    let price = props.expense ? props.expense.price : 0;
 
     this.state = { title, price } // no default set here anymore, now it is set above so it can be used for creating AND updating an expense item
 
