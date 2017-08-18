@@ -30,4 +30,4 @@ export default (state=initialState, action) => {
   }
 }
 
-// reducer(14, {type: 'INC', payload: 12}) -- will return 26
+// reducer(14, {type: 'INCREMENT', payload: 12}) -- will return 26
