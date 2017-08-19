@@ -27,3 +27,9 @@ export const categoryDelete = (category) => ({
   type: 'CATEGORY_DELETE',
   payload: category,
 })
+
+export const categoryReset = () => ({type: 'CATEGORY_RESET'})
+
+
+// NEED parens around curlys because there are NOT code blocks
+// this will allow the object to be returned, since there are parens for the return and curlys for the object 
