@@ -1,6 +1,6 @@
 import React from 'react'
 
-class categoryForm extends React.Component{
+class CategoryForm extends React.Component{
   constructor(props){
     super(props)
 
@@ -25,7 +25,7 @@ class categoryForm extends React.Component{
   render() {
     return(
       <form className='category-form' onSubmit={this.handleSubmit}>
-        <input name='title' type='text' placeholder='title' value={this.state.input} onChange={this.handleChange} />
+        <input name='title' type='text' placeholder='title' value={this.state.title} onChange={this.handleChange} />
         <button type='submit'> {this.props.buttonText} </button>
       </form>
     )
@@ -33,4 +33,4 @@ class categoryForm extends React.Component{
 }
 
 // don't need to connect to state from the store
-export default categoryForm
+export default CategoryForm
