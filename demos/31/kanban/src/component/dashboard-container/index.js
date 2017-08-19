@@ -14,6 +14,11 @@ class DashboardContainer extends React.Component {
     return (
       <main className='dashboard-container'>
         <h2>Dashboard</h2>
+        {this.props.categories.map((item) => {
+          <div key={item.id}>
+            <h3>{item.title}</h3>
+          </div>
+        })}
       </main>
     )
   }
@@ -38,6 +43,7 @@ const mapDispatchToProps = (dispatch, getState) => {
 
 // instead of just exporting the component, now export the component after calling connect with mapStateToProps and mapDispatchToProps, it will return a function that the componenet can be passed through
 // now anything that was passed through with mapStateToProps and mapDispatchToProps can be accessed through props
+// connect returns a function that you invoke with your component
 export default connect(mapStateToProps, mapDispatchToProps)(default DashboardContainer)
 
 
