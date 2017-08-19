@@ -4,6 +4,7 @@ import {Provider} from 'react-redux'
 import {BrowserRouter, Route} from 'react-dom'
 
 import createAppStore from '../../lib/store.js'
+import DashboardContainer from '../dashboard-container'
 
 const store = createAppStore()
 
@@ -19,7 +20,7 @@ class App extends React.Component {
       <div>
         <Provider store={store}>
           <BrowserRouter>
-            <h1>Hello from App</h1>
+            <Route expact path='/' component={DashboardContainer} />
           </BrowserRouter>
         </Provider>
       </div>
