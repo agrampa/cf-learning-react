@@ -6,6 +6,7 @@ import {categoryCreate, categoryUpdate, categoryDelete} from '../../action/ctego
 class DashboardContainer extends React.Component {
   componentDidMount() {
     // this is the categoryCreate defined below in the object, will dispatch whatever is passed in
+    // this is not the function that was imported, it is the action that will call the function that was imported, as defined below in mapDispatchToProps
     this.props.categoryCreate({title: 'hello'})
   }
 
@@ -28,6 +29,7 @@ const mapStateToProps = state => {
 // will add three properties (create, update and delete categories) and each one returns a function and dispatches the result of the action creator function
 const mapDispatchToProps = (dispatch, getState) => {
   return {
+    // these invoke the functions that are imported
     categoryCreate: (category) => dispatch(categoryCreate(category)),
     categoryUpdate: (category) => dispatch(categoryUpdate(category)),
     categoryDelete: (category) => dispatch(categoryDelete(category)),
