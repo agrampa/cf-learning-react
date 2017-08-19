@@ -30,3 +30,7 @@ store.dispatch({
     timestamp: new Date()
   }
 })
+
+
+call dispatch three times, then subscribe is called
+for example, store.dispatch... then subscribe will show the first store created, then call store.dispatch a second time and both will be shown in the console, call store.dispatch again and all three will show up in the console, so it will be called and return whatever is included in the subscribe callback every time dispatch has been called
