@@ -1,10 +1,13 @@
 'use strict'
 
-initialState = []
+let initialState = []
+
+// Everything needs to be immutable
+// Everything needs to be a pure function
 
 // categories will have an id and a title
 
-reducer = (state=initialState, action) => {
+export default reducer = (state=initialState, action) => {
   let {type, payload} = action
 
   switch(type) {
