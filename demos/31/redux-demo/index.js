@@ -9,3 +9,16 @@ const store = createStore(categoryReducer)
 
 // dispatch an action
 store.dispatch(categoryCreate({title: 'cool beans'}))
+
+// now store.getState() will return the new state with the title, and added uuid and timestamp
+
+
+// it is easier to write it using actions rather than using the code below:
+store.dispatch({
+  type: 'CATEGORY_CREATE',
+  payload: {
+    title: 'cool beans'
+    id: uuid()
+    timestamp: new Date()
+  }
+})

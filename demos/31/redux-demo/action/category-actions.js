@@ -9,6 +9,8 @@
 
 // reducer defines state and interactions, action creators return actions
 
+import uuid from 'uuid/v1'
+
 export const categoryCreate = (category) => {
   category.id = uuid()
   category.timestamp = new Date()
@@ -32,4 +34,4 @@ export const categoryReset = () => ({type: 'CATEGORY_RESET'})
 
 
 // NEED parens around curlys because there are NOT code blocks
-// this will allow the object to be returned, since there are parens for the return and curlys for the object 
+// this will allow the object to be returned, since there are parens for the return and curlys for the object
