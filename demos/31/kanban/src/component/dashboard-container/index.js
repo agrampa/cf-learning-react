@@ -1,7 +1,14 @@
 import React from 'react'
 import {connect} from 'react-redux'
 
+import {categoryCreate, categoryUpdate, categoryDelete} from '../../action/ctegory-actions.js'
+
 class DashboardContainer extends React.Component {
+  componentDidMount() {
+    // this is the categoryCreate defined below in the object, will dispatch whatever is passed in
+    this.props.categoryCreate({title: 'hello'})
+  }
+
   render() {
     return (
       <main className='dashboard-container'>
@@ -14,13 +21,16 @@ class DashboardContainer extends React.Component {
 // returns an object and anything added to the object will become a prop
 const mapStateToProps = state => {
   return {
-
+    categories: state // this.props.categories now represents the entire state
   }
 }
 
+// will add three properties (create, update and delete categories) and each one returns a function and dispatches the result of the action creator function
 const mapDispatchToProps = (dispatch, getState) => {
   return {
-
+    categoryCreate: (category) => dispatch(categoryCreate(category)),
+    categoryUpdate: (category) => dispatch(categoryUpdate(category)),
+    categoryDelete: (category) => dispatch(categoryDelete(category)),
   }
 }
 
