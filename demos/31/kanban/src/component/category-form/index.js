@@ -19,7 +19,10 @@ class CategoryForm extends React.Component{
 
   handleSubmit(e) {
     e.preventDefault()
-    this.props.onComplete(this.state)
+    // this.state was passed by reference
+    // state was set to have one id, so need to reset each time
+    // use Object.assign
+    this.props.onComplete(Object.assign({}, this.state))
   }
 
   render() {
