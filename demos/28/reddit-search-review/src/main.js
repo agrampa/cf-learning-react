@@ -2,7 +2,7 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import superagent from '`superagent`';
+import superagent from 'superagent';
 
 const API_URL = 'http://www.reddit.com/r';
 
