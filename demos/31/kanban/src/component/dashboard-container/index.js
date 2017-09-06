@@ -3,6 +3,14 @@ import {connect} from 'react-redux'
 
 import {categoryCreate, categoryUpdate, categoryDelete} from '../../action/category-actions.js'
 
+// can also be:
+
+import {
+  categoryCreate as categoryActionCreate,
+  categoryUpdate as categoryActionUpdate,
+  categoryDelete as categoryActionDelete
+} from '../../action/category-actions.js'
+
 import CategoryForm from '../category-form'
 
 class DashboardContainer extends React.Component {
@@ -43,6 +51,16 @@ const mapDispatchToProps = (dispatch, getState) => {
     categoryCreate: (category) => dispatch(categoryCreate(category)),
     categoryUpdate: (category) => dispatch(categoryUpdate(category)),
     categoryDelete: (category) => dispatch(categoryDelete(category)),
+  }
+}
+
+// if renamed above: 
+const mapDispatchToProps = (dispatch, getState) => {
+  return {
+    // these invoke the functions that are imported
+    categoryCreate: (category) => dispatch(categoryActionCreate(category)),
+    categoryUpdate: (category) => dispatch(categoryActionUpdate(category)),
+    categoryDelete: (category) => dispatch(categoryActionDelete(category)),
   }
 }
 

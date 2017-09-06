@@ -9,6 +9,12 @@ class CategoryForm extends React.Component{
       title: this.props.category ? this.props.category.title : ''
     }
 
+    // or assign it to an object
+    this.state = Object.assign({}, props.category)
+
+    // or use 'babel-plugin-transform-object-rest-spread
+    
+
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
   }
