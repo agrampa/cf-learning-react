@@ -17,7 +17,7 @@ function tryCovert(temperature, convert) {
     return '';
   }
 
-  const output = conver(input);
+  const output = convert(input);
   const rounded = Math.round(output * 1000) / 1000;
   return rounded.toString();
 }
